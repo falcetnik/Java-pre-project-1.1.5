@@ -11,10 +11,6 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
 
-    public UserDaoJDBCImpl() {
-
-    }
-
     @Override
     public void createUsersTable() {
         String sql = "create table text.new_table \n" +

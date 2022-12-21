@@ -7,7 +7,6 @@ import java.util.Objects;
 @Table (name = "new_table")
 public class User {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

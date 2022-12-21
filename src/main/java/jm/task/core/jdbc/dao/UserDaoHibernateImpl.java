@@ -10,12 +10,6 @@ import java.util.List;
 import static java.util.Optional.ofNullable;
 
 public class UserDaoHibernateImpl implements UserDao {
-    private final static String createHibernateSequence = "CREATE TABLE hibernate_sequence ( next_val BIGINT )";
-    public static final String insert = "insert into hibernate_sequence (next_val) VALUES (1)";
-
-    public UserDaoHibernateImpl() {
-
-    }
 
     @Override
     public void createUsersTable() {
@@ -24,8 +18,8 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction = session.beginTransaction();
             session.createSQLQuery("create table if not exists text.new_table (id int not null auto_increment primary key, name varchar(45) not null, lastName varchar(45) not null, age int not null)")
                     .executeUpdate();
-            session.createSQLQuery(createHibernateSequence).executeUpdate();
-            session.createSQLQuery(insert).executeUpdate();
+            session.createSQLQuery("CREATE TABLE if not exists text.hibernate_sequence ( next_val BIGINT )").executeUpdate();
+            session.createSQLQuery("insert into hibernate_sequence (next_val) VALUES (1)").executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             ofNullable(transaction).ifPresent(Transaction::rollback);
